@@ -41,3 +41,13 @@ This makes the program easier to read, easier to maintain, and easier to expand 
 
 Commit 3 Screenshot:
 ![Commit 3 screen capture](/assets/images/commit3.png)
+
+## Commit 4 Reflection notes
+In this milestone, I simulated a slow response by making the server sleep for 10 seconds when the browser requests /sleep.  
+This experiment shows the weakness of a single-threaded server, because while one request is being processed, the server cannot handle other requests at the same time.  
+When I opened /sleep in one browser window and then opened / in another window, the second request also had to wait until the first one finished.  
+
+This happens because the server processes incoming connections sequentially, so one slow task blocks all other clients behind it.  
+I learned that even though the server is functionally correct, its performance and responsiveness are poor when one request takes too long.  
+This milestone clearly demonstrates why concurrency is important in server development, especially when many users may access the server simultaneously.  
+It also prepares the motivation for the next milestone, where a multithreaded server is introduced to solve this blocking problem.
