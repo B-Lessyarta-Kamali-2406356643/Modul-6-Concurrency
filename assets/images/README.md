@@ -43,6 +43,7 @@ Commit 3 Screenshot:
 ![Commit 3 screen capture](/assets/images/commit3.png)
 
 ## Commit 4 Reflection notes
+
 In this milestone, I simulated a slow response by making the server sleep for 10 seconds when the browser requests /sleep.  
 This experiment shows the weakness of a single-threaded server, because while one request is being processed, the server cannot handle other requests at the same time.  
 When I opened /sleep in one browser window and then opened / in another window, the second request also had to wait until the first one finished.  
@@ -51,3 +52,15 @@ This happens because the server processes incoming connections sequentially, so 
 I learned that even though the server is functionally correct, its performance and responsiveness are poor when one request takes too long.  
 This milestone clearly demonstrates why concurrency is important in server development, especially when many users may access the server simultaneously.  
 It also prepares the motivation for the next milestone, where a multithreaded server is introduced to solve this blocking problem.
+
+## Commit 5 Reflection notes
+
+I changed the server from a single-threaded design into a multithreaded server by using a ThreadPool.  
+
+Instead of handling each incoming connection directly in the main thread, the main thread now passes each connection as a job to the thread pool.  
+I learned that the ThreadPool works by maintaining a fixed number of worker threads that wait for jobs sent through a channel.  
+When a request arrives, one available worker takes the job and executes handle_connection, which allows multiple requests to be processed concurrently.  
+This approach is better than creating unlimited new threads because it keeps resource usage more controlled and reduces the risk of exhausting system resources.  
+
+After testing it with /sleep and /, I could see that a slow request no longer blocks every other request in the same way as before.  
+This milestone helped me understand how concurrency improves server responsiveness and why thread pools are a practical design for building more scalable servers.
