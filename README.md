@@ -13,3 +13,20 @@ Using BufReader and .lines(), I could see that the browser sends a request line 
 This helped me understand that even very simple web server must first read and understand the structure of an HTTP request before responding properly.
 
 I also noticed that the browser can send repeated requests, which explains why multiple logs appeared in the terminal.
+
+## Commit 2 Reflection notes
+
+I learned how the server can return an actual HTML page instead of only printing the request in the terminal.
+
+The server reads the file hello.html, calculates its content length, and then formats a valid HTTP response before sending it to the browser.
+
+This made me understand that the browser needs both the response body and the HTTP metadata, especially the status line and Content-Length, to render the page correctly.
+
+I also learned that the Rust standard library is enough to build a very simple web server without using a web framework.
+
+Compared to the previous milestone, this step makes the application feel like a real web server because the browser can now display content normally.
+
+This milestone also showed me the difference between receiving a request and properly responding to that request.
+
+Commit 2 Screenshot:
+![Commit 2 screen capture](/assets/images/commit2.png)
