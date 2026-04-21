@@ -64,3 +64,14 @@ This approach is better than creating unlimited new threads because it keeps res
 
 After testing it with /sleep and /, I could see that a slow request no longer blocks every other request in the same way as before.  
 This milestone helped me understand how concurrency improves server responsiveness and why thread pools are a practical design for building more scalable servers.
+
+## Commit Bonus Reflection notes
+For the bonus part, I replaced the 'new' function in ThreadPool with a 'build' function that returns a Result.  
+This change makes the construction of a thread pool safer because invalid input, such as a size of zero, no longer causes an immediate panic through assert!.  
+
+Instead, the function now returns an explicit error value, which is a cleaner and more flexible design.  
+I learned that using build is better when object creation can fail, because it communicates that possibility directly through the type system.  
+This also makes the API more expressive and more aligned with Rust’s error-handling style.  
+
+Compared to the previous version, this improvement makes the code easier to maintain and easier to extend if more validation rules are added later.  
+Overall, this bonus helped me understand the difference between forcing success with 'new' and designing safer construction logic with build.
